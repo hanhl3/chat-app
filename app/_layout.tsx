@@ -2,7 +2,7 @@ import Index from '.'
 import { Link, Stack } from 'expo-router'
 import { ConvexReactClient, ConvexProvider } from 'convex/react'
 import { TouchableOpacity } from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
     unsavedChangesWarning: false,
@@ -20,44 +20,44 @@ export default function RootLayout() {
                 }}
             >
                 <Stack.Screen
-                    name='index'
+                    name="index"
                     options={{
                         headerTitle: 'My Chats',
                         headerRight: () => (
                             <Link href={'/(modal)/create'} asChild>
                                 <TouchableOpacity>
-                                <Ionicons name="add" size={32} color="white" />
+                                    <Ionicons
+                                        name="add"
+                                        size={32}
+                                        color="white"
+                                    />
                                 </TouchableOpacity>
                             </Link>
-                        )
+                        ),
                     }}
-                >
-                </Stack.Screen>
+                ></Stack.Screen>
                 <Stack.Screen
-                    name='(modal)/create'
+                    name="(modal)/create"
                     options={{
                         headerTitle: 'Create Chat',
                         presentation: 'modal',
                         headerLeft: () => (
                             <Link href={'/'} asChild>
                                 <TouchableOpacity>
-                                <Ionicons name="close-outline" size={32} color="white" />
+                                    <Ionicons
+                                        name="close-outline"
+                                        size={32}
+                                        color="white"
+                                    />
                                 </TouchableOpacity>
                             </Link>
-                        )
+                        ),
                     }}
-                >
-                </Stack.Screen>
+                ></Stack.Screen>
                 <Stack.Screen
-                    name='(chat)/[chatid]'
-                    options={{
-                        headerTitle: 'Chat',
-                    }}
-                >
-
-                </Stack.Screen>
-               
+                    name="(chat)/[chatid]"
+                ></Stack.Screen>
             </Stack>
         </ConvexProvider>
-    ) 
+    )
 }
