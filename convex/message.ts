@@ -4,11 +4,22 @@ import { v } from 'convex/values'
 export const getMessage = query({
     args: { chatId: v.id('groups') },
     handler: async (ctx, { chatId }) => {
-        const groups = await ctx.db
+        const messages = await ctx.db
             .query('message')
             .filter((q) => q.eq(q.field('group_id'), chatId))
             .collect()
-        return groups
+        return Promise.all(
+            messages.map(async (message) => {
+                if (message.file) {
+                    const url = await ctx.storage.getUrl(message.file)
+                    if (url) return {
+                        ...message,
+                        file: url
+                    }
+                }
+                return message
+            })
+        )
     },
 })
 
